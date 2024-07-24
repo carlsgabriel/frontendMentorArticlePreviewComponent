@@ -11,7 +11,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     background-color: hsl(210, 46%, 95%);
     font-family: 'Manrope';
 }
@@ -64,6 +63,11 @@ main {
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+
+    /*
+    "Pai" de Shared, tem que estar relativo para que shared seja absolute e apareça certinho em cima do botão depois de posicionado.
+    */
+    position: relative;
 }
 
 .profile-info {
@@ -109,17 +113,18 @@ main {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    position: relative;
 }
 
 .buttom:hover {
     background-color: hsl(217, 19%, 35%);
 }
 
+/*
+Se passar o mouse em cima do botão, a img dentro do botão:
+Faz com que a cor de SVG inverta, ficando branca.
+*/
 .buttom:hover #buttom-icon {
-    /*
-    Faz com que a cor de SVG inverta, ficando branca.
-    */
+
     filter: brightness(0) invert(1);
 }
 
@@ -131,9 +136,14 @@ main {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
+    /*
+    Absolute para ser posiconado acima do botão.
+    */
     position: absolute;
-    top: 465px;
-    right: 525px;
+    top: -70px;
+    right: -108px;
+
     letter-spacing: 5px;
     text-transform: uppercase;
     color: hsl(212, 23%, 69%);
@@ -141,6 +151,9 @@ main {
     box-shadow: 0px 15px 15px hsl(210, 46%, 95%);
 }
 
+/*
+Setinha em baixo do botão.
+*/
 .shared::after {
     content: '';
     border: 10px solid hsl(217, 19%, 35%);
@@ -162,4 +175,86 @@ main {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+@media(max-width: 750px) {
+    main {
+        width: 350px;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .left-top {
+        width: 350px;
+    }
+
+    .left-top img {
+        height: 230px;
+        width: 100%;
+        object-position: top;
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 10px;
+    }
+
+    .right-bottom {
+        width: 350px;
+        padding: 17px 27px;
+    }
+
+    .right-bottom h1 {
+        font-size: 18px;
+        margin-top: 15px;
+    }
+
+    .right-bottom p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .profile {
+        margin-top: 30px;
+        margin-bottom: 0px;
+    }
+
+    .profile-img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .text-name {
+        font-size: 15px;
+    }
+
+    .text-data {
+        font-size: 15px;
+    }
+
+    .buttom {
+        width: 40px;
+        height: 40px;
+
+        /*
+        Para que apareça após o shared cobrir as informações.
+        */
+        z-index: 1;
+    }
+
+    .shared {
+        width: 350px;
+        height: 75px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        top: -15px;
+        right: -27px;
+        justify-content: unset;
+        padding-left: 40px;
+    }
+
+    .shared::after {
+        display: none;
+    }
+
+    .shared-icons {
+        margin-left: 20px;
+    }
 }
